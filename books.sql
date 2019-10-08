@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2019 at 09:04 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Generation Time: Oct 08, 2019 at 09:28 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `amar`
+-- Database: `books`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `books` (
   `id` int(111) NOT NULL,
   `author_name` varchar(111) NOT NULL,
-  `description` varchar(111) NOT NULL,
+  `main_cat` varchar(200) DEFAULT NULL,
+  `description` longtext NOT NULL,
   `image` varchar(111) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,11 +41,13 @@ CREATE TABLE `books` (
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` (`id`, `author_name`, `description`, `image`, `created_at`) VALUES
-(1, 'vinay', 'hye', 'city2.jpg', '2019-04-16 09:07:20'),
-(2, 'kkkkk', 'kkkkkkk', 'city3.jpg', '2019-04-16 09:07:20'),
-(3, 'firstbook', 'QQQ', 'computer.jpg', '2019-04-16 09:07:20'),
-(4, 'SECOND', 'BOOK', 'fb_twit_gplus_icon.png', '2019-04-16 09:07:20');
+INSERT INTO `books` (`id`, `author_name`, `main_cat`, `description`, `image`, `created_at`) VALUES
+(1, 'vinay', '', 'hye', 'city2.jpg', '2019-04-16 09:07:20'),
+(2, 'kkkkk', '', 'kkkkkkk', 'city3.jpg', '2019-04-16 09:07:20'),
+(3, 'firstbook', '', 'QQQ', 'computer.jpg', '2019-04-16 09:07:20'),
+(4, 'SECOND', '', 'BOOK', 'fb_twit_gplus_icon.png', '2019-04-16 09:07:20'),
+(5, 'cbjasfb sfabs', '', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\">\r\n	<tbody>\r\n		<tr>\r\n			<td>dd</td>\r\n			<td', 'default.png', '2019-10-08 19:23:11'),
+(6, 'daaD', 'kkkkk', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\">\r\n	<tbody>\r\n		<tr>\r\n			<td>SADAS</td>\r\n			<td>SFAS</td>\r\n		</tr>\r\n		<tr>\r\n			<td>SFA</td>\r\n			<td>ASFAS</td>\r\n		</tr>\r\n		<tr>\r\n			<td>SFA</td>\r\n			<td>SFAS</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', 'default.png', '2019-10-08 19:27:27');
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

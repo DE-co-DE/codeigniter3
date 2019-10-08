@@ -15,6 +15,7 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 
   <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-datepicker.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
@@ -24,7 +25,7 @@
   </head>
  <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="<?php echo base_url(); ?>">Company Name</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="<?php echo base_url(); ?>">ACME Sujan</a>
     
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -42,9 +43,12 @@
             <h1 class="h2 text-uppercase"><?php echo @$title==''?'Dashboard':'ADD '.@$title?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
            <?php if(@$title==''){ ?>
-              <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>addBook">
+              <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>addMain">
                 <span class="fa fa-plus"></span>
-               Add New Book </a>
+               Add Main Product </a> || 
+                   <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>addSub">
+                <span class="fa fa-plus"></span>
+               Add Sub Product </a>
                <?php } else { ?>
    <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>Dashboard">
                 <span class="fa fa-arrow-left"></span>
@@ -53,10 +57,10 @@
               
             </div>
         
-<form class="example" action="/action_page.php">
+<!-- <form class="example" action="/action_page.php">
   <input type="text" placeholder="Search.." name="search">
   <button type="submit"><i class="fa fa-search"></i></button>
-</form>
+</form> -->
           </div>
 
         

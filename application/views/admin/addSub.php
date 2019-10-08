@@ -2,11 +2,11 @@
 <div class="container register-form">
             <div class="form">
                 <div class="note">
-                    <p class="heading-4">Add Main product.</p>
+                    <p class="heading-4">Add Sub product.</p>
                 </div>
 
                 <div class="form-content">
-                    <?php echo form_open_multipart('addMain'); ?>
+                    <?php echo form_open_multipart('addSub'); ?>
                     <div class="row">
                         
                         <div class="col-md-6">
@@ -16,6 +16,15 @@
                                     </label>
                                 <input type="file" id="files" class="form-control d-none" name="image" onchange="readURL(this);"  />
 
+                            </div>
+                             <div class="form-group">
+                                 <label>Select Main Product</label>
+                               <select name="main_cat" class="form-control">
+                                   <option value=""> select one </option>
+                                   <?php foreach($mainProduct as $cat){?>
+                                    <option value="<?php echo $cat['author_name']; ?>"><?php echo $cat['author_name']; ?></option>
+                                   <?php } ?>
+                               </select>
                             </div>
                             <div class="form-group">
                                  <label>Product name</label>
