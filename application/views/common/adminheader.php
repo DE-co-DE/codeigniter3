@@ -42,13 +42,17 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2 text-uppercase"><?php echo @$title==''?'Dashboard':'ADD '.@$title?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
+            
            <?php if(@$title==''){ ?>
+            <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>Main">
+                <span class="fa fa-plus"></span>
+               Add Main Category </a> || 
               <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>addMain">
                 <span class="fa fa-plus"></span>
-               Add Main Product </a> || 
+               Add Sub Category </a> || 
                    <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>addSub">
                 <span class="fa fa-plus"></span>
-               Add Sub Product </a>
+               Add  Product </a>
                <?php } else { ?>
    <a class="btn btn-sm btn-outline-secondary " href="<?php echo base_url() ?>Dashboard">
                 <span class="fa fa-arrow-left"></span>
@@ -62,7 +66,23 @@
   <button type="submit"><i class="fa fa-search"></i></button>
 </form> -->
           </div>
-
+</main>
+<?php
+if($this->session->flashdata('success')) {
+  $message = $this->session->flashdata('success');
+  ?>
+<div class="alert alert-success"><?php echo $message; ?></div>
+<?php 
+}
+?>
+<?php
+if($this->session->flashdata('error')) {
+  $message = $this->session->flashdata('error');
+  ?>
+<div class="alert alert-error"><?php echo $message; ?></div>
+<?php 
+}
+?>
         
           
         

@@ -52,7 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['Dashboard'] = 'welcome/dashboard';
 $route['addMain'] = 'welcome/addBook';
 $route['addSub'] = 'welcome/addSub';
+$route['addSub/(:any)'] = 'welcome/addSub/$1';
+$route['Show/(:any)'] = 'welcome/show/$1';
+$route['Delete/(:any)/(:any)'] = 'welcome/delete/$1/$2';
 $route['logout'] = 'welcome/logout';
+$route['Main'] = 'MainController';
 $route['default_controller'] = 'welcome';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

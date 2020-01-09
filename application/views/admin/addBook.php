@@ -10,12 +10,22 @@
                     <div class="row">
                         
                         <div class="col-md-6">
+                      
                                  <div class="form-group">
                                     <label for="files" class="border p-4">
                                         <span class="fa fa-camera fa-3x"></span>
                                     </label>
                                 <input type="file" id="files" class="form-control d-none" name="image" onchange="readURL(this);"  />
 
+                            </div>
+                            <div class="form-group">
+                                 <label>Select Main Category</label>
+                               <select name="maincategory_id" class="form-control">
+                                   <option value=""> select one </option>
+                                   <?php foreach($mainCategories as $cat){?>
+                                    <option value="<?php echo $cat['id']; ?>"><?php echo $cat['title']; ?></option>
+                                   <?php } ?>
+                               </select>
                             </div>
                             <div class="form-group">
                                  <label>Product name</label>

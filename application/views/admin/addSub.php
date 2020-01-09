@@ -2,7 +2,7 @@
 <div class="container register-form">
             <div class="form">
                 <div class="note">
-                    <p class="heading-4">Add Sub product.</p>
+                    <p class="heading-4">Add  product.</p>
                 </div>
 
                 <div class="form-content">
@@ -17,15 +17,29 @@
                                 <input type="file" id="files" class="form-control d-none" name="image" onchange="readURL(this);"  />
 
                             </div>
-                             <div class="form-group">
-                                 <label>Select Main Product</label>
-                               <select name="main_cat" class="form-control">
+                            <div class="form-group">
+                                 <label>Select Main Category</label>
+                               <select name="maincategory_id" class="form-control" 
+                               id="maincategory_id" >
                                    <option value=""> select one </option>
-                                   <?php foreach($mainProduct as $cat){?>
-                                    <option value="<?php echo $cat['author_name']; ?>"><?php echo $cat['author_name']; ?></option>
+                                   <?php foreach($mainCategories as $cat){?>
+                                    <option value="<?php echo $cat['id']; ?>"
+                                    <?php echo $cat['id']===$selected?"selected":" "; ?>
+                                    ><?php echo $cat['title']; ?></option>
                                    <?php } ?>
                                </select>
                             </div>
+                            <?php if(isset($subCategories)) {  ?>
+                             <div class="form-group">
+                                 <label>Select Sub Category</label>
+                               <select name="main_cat" class="form-control">
+                                   <option value=""> select one </option>
+                                   <?php foreach($subCategories as $cat){?>
+                                    <option value="<?php echo $cat['id']; ?>"><?php echo $cat['author_name']; ?></option>
+                                   <?php } ?>
+                               </select>
+                            </div>
+                                   <?php } ?>
                             <div class="form-group">
                                  <label>Product name</label>
                                 <input type="text" class="form-control" placeholder="Title" name="author_name" value=""/>
@@ -64,4 +78,9 @@
 
             reader.readAsDataURL(input.files[0]);
         }
-    }</script>
+    }
+    $("#maincategory_id").change(function(){
+        let id=$(this).val();
+        window.location.href="<?php echo base_url()?>addSub/"+id;
+    })
+    </script>

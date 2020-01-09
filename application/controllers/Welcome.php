@@ -49,7 +49,9 @@ class Welcome extends CI_Controller {
 
 	public function dashboard()
 	{
-		$data['fetch_data'] = $this->add_model->fetch();
+		$data['MainCats'] = $this->add_model->fetch('maincategory');
+		$data['SubCats'] = $this->add_model->getMains();
+		$data['products'] = $this->add_model->fetchProducts();
 		// redirect('Dashboard');
 
 		$this->load->view('common/adminheader'); 
@@ -69,9 +71,12 @@ class Welcome extends CI_Controller {
 		public function addBook()
 	{
 		if(!$this->input->post()){
-		$data['title'] = 'Product';
+		$data['title'] = 'Category';
+		$data['mainCategories']=$this->add_model->fetch('maincategory');
+	//	print_r($data);
 		$this->load->view('common/adminheader',$data); 
-		$this->load->view('admin/addBook'); 
+		$this->load->view('admin/addBook',$data); 
+	
 		}else{
 
 				$config['upload_path']          = './uploads/';
@@ -96,22 +101,35 @@ class Welcome extends CI_Controller {
 }
 				$alldata = array(
 					'image'=>$store,
+					'maincategory_id'=>$this->input->post('maincategory_id'),
 					'author_name'=>$this->input->post('author_name'),
 					'description'=>$this->input->post('description'),
 				);
-			//	print_r($data);
-				$this->add_model->addbook($alldata);
-				redirect('Dashboard');
+				// print_r($alldata);
+				// exit;
+				$resp=$this->add_model->addbook($alldata);
+				if($resp){
+					$this->session->set_flashdata('success','Sub Category added Successfully'); 
+					} else{
+						$this->session->set_flashdata('error','Some error occured please try again'); 
+					}
+				redirect('addMain');
 		
 	}
 	
 	}
 
-		public function addSub()
+		public function addSub($subCatId="")
 	{
 		if(!$this->input->post()){
-		$data['title'] = 'Sub Product';
-		$data['mainProduct']=$this->add_model->getMains();
+			$data['title'] = 'Category';
+			$data['selected']=-1;
+			if($subCatId!=""){
+				$data['selected']=$subCatId;
+				$data['subCategories']=$this->add_model->getSubByID($subCatId);
+			}
+			$data['mainCategories']=$this->add_model->fetch('maincategory');
+
 		//print_r($data);
 		$this->load->view('common/adminheader',$data); 
 		$this->load->view('admin/addSub',$data); 
@@ -145,11 +163,83 @@ class Welcome extends CI_Controller {
 					'description'=>$this->input->post('description'),
 				);
 			//	print_r($data);
-				$this->add_model->addbook($alldata);
-				redirect('Dashboard');
+				$resp=$this->add_model->addbook($alldata); 
+				if($resp){
+					$this->session->set_flashdata('success','Product added Successfully'); 
+					} else{
+						$this->session->set_flashdata('error','Some error occured please try again'); 
+					}
+				redirect('addSub');
 		
 	}
 	
+	}
+	public function Show($type)
+	{
+		if($type==""){
+			$this->session->set_flashdata('error','Cant be Accessed'); 
+			redirect('Dashboard');
+			exit;
+		}
+		if($type=='MainCategories'){
+			$data['title']="Main Categories";
+			$data['mainCategories']=$this->add_model->fetch('maincategory');
+		}
+		if($type=='SubCategories'){
+			$data['title']="Sub Categories";
+			$SubCategories=array();
+			$data['SubCategories']=array();
+			$data['mainCategory']=$this->add_model->fetch('maincategory');
+			foreach($data['mainCategory'] as $main){
+				$resp=$this->add_model->getSubByID($main["id"]);
+				if($resp){
+				$SubCategories[$main["title"]]=$resp;
+				}
+			}
+			$data['SubCategories']=$SubCategories;
+		}
+		if($type=='Products'){
+			$data['title']="Products";
+			$data['products'] = $this->add_model->fetchProducts();
+
+		}
+		$this->load->view('common/adminheader'); 
+		$this->load->view('admin/Show/display', $data); 
+
+
+	}
+	
+	public function delete($id,$type)
+	{
+		if($type=="" || $id==''){
+			$this->session->set_flashdata('error','Cant be Accessed'); 
+			redirect('Dashboard');
+			exit;
+		}
+		if($type=='MainCategories'){
+			$data['title']="Main Categories";
+			$data['mainCategories']=$this->add_model->fetch('maincategory');
+		}
+		if($type=='SubCategories'){
+			$data['title']="Sub Categories";
+			$SubCategories=array();
+			$data['SubCategories']=array();
+			$data['mainCategories']=$this->add_model->fetch('maincategory');
+			foreach($data['mainCategories'] as $main){
+				$resp=$this->add_model->getSubByID($main["id"]);
+				$SubCategories[$main["title"]]=$resp;
+			}
+			$data['SubCategories']=$SubCategories;
+		}
+		if($type=='Products'){
+			$data['title']="Products";
+			$data['products'] = $this->add_model->fetchProducts();
+
+		}
+		//$this->load->view('common/adminheader'); 
+		//$this->load->view('admin/Show/display', $data); 
+
+
 	}
 
 }
