@@ -74,6 +74,7 @@ if($this->session->flashdata('success')) {
 <div class="alert alert-success"><?php echo $message; ?></div>
 <?php 
 }
+
 ?>
 <?php
 if($this->session->flashdata('error')) {
