@@ -41,7 +41,7 @@ class MainController extends CI_Controller {
 					'title'=>$this->input->post('title'),
 					'description'=>$this->input->post('description'),
 				);
-			//	print_r($data);
+			
                 $resp=$this->add_model->addMainCategory($alldata);
                 
                 if($resp){
