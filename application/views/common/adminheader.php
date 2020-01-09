@@ -74,13 +74,12 @@ if($this->session->flashdata('success')) {
 <div class="alert alert-success"><?php echo $message; ?></div>
 <?php 
 }
-
 ?>
 <?php
 if($this->session->flashdata('error')) {
   $message = $this->session->flashdata('error');
   ?>
-<div class="alert alert-error"><?php echo $message; ?></div>
+<div class="alert alert-error k"><?php echo $message; ?></div>
 <?php 
 }
 ?>
